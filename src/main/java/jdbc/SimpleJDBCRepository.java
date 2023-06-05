@@ -34,7 +34,7 @@ public class SimpleJDBCRepository {
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setInt(3, user.getAge());
-            ps.executeUpdate();
+            ps.execute();
             User user1 = findUserByName(user.getFirstName());
             return user1.getId();
         } catch (SQLException e) {
