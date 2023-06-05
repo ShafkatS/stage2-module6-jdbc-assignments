@@ -86,7 +86,7 @@ public class SimpleJDBCRepository {
     }
 
     public User updateUser(User user) {
-       try {
+        try {
             connection = CustomDataSource.getInstance().getConnection();
             ps = connection.prepareStatement(updateUserSQL);
             ps.setLong(1, user.getId());
