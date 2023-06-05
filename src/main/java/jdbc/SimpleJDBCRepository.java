@@ -86,18 +86,18 @@ public class SimpleJDBCRepository {
     }
 
     public User updateUser(User user) {
-        try {
-            connection = CustomDataSource.getInstance().getConnection();
-            ps = connection.prepareStatement(updateUserSQL);
+       try (Connection connection = CustomDataSource.getInstance().getConnection();
+             PreparedStatement ps = connection.prepareStatement(UPDATE_USER_SQL)) {
             ps.setLong(1, user.getId());
+            ps.setLong(5, user.getId());
             ps.setString(2, user.getFirstName());
             ps.setString(3, user.getLastName());
             ps.setInt(4, user.getAge());
             ps.executeUpdate();
-            return findUserById(user.getId());
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+        return user;
     }
 
     public void deleteUser(Long userId) {
